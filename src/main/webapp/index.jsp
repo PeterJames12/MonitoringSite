@@ -47,11 +47,8 @@
     %>
 
     <%
-
         for (MonitoringURL urlEntity : urlList) {
-
         %>
-
     <tr>
         <td><%= urlEntity.getUrl()%></td>
         <td><%= urlEntity.getStatus()%></td>
