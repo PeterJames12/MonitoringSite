@@ -1,4 +1,6 @@
 <%@ page import="monitoring.controller.MonitoringController" %>
+<%@ page import="monitoring.model.MonitoringURL" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -40,27 +42,27 @@
     %>
 
 
-    <%--<tbody>--%>
+    <tbody>
 
-    <%--<%--%>
-        <%--final MonitoringController monitoringController = new MonitoringController();--%>
-        <%--final List<MonitoringURL> urlList = monitoringController.getUrlInfo();--%>
-    <%--%>--%>
+    <%
+        final MonitoringController monitoringController = new MonitoringController();
+        final List<MonitoringURL> urlList = monitoringController.getUrlInfo();
+    %>
 
-    <%--<%--%>
+    <%
 
-        <%--for (MonitoringURL url : urlList) {--%>
+        for (MonitoringURL url : urlList) {
 
-        <%--%>--%>
+        %>
 
-    <%--<tr>--%>
-        <%--<td><%= url.getUrl()%></td>--%>
-        <%--<td><%= url.getStatus()%></td>--%>
-        <%--<td><%= url.getStatusCode()%></td>--%>
-        <%--<td><%= url.getExtraInfo()%></td>--%>
-    <%--</tr>--%>
+    <tr>
+        <td><%= url.getUrl()%></td>
+        <td><%= url.getStatus()%></td>
+        <td><%= url.getStatusCode()%></td>
+        <td><%= url.getExtraInfo()%></td>
+    </tr>
 
-    <%--<%}%>--%>
+    <%}%>
     </tbody>
 </table>
 
