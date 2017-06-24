@@ -15,6 +15,9 @@ public class MonitoringController {
      * Save url to database.
      */
     public void saveUrl(String url) {
+        if ("".equals(url) || url == null) {
+            return;
+        }
         val monitoringService = ServiceFactory.getMonitoringService();
         monitoringService.saveUrl(url);
     }

@@ -37,10 +37,8 @@ public class MonitoringServiceImpl implements MonitoringService {
         checkUrl(url);
     }
 
-
     public static void main(String[] args) {
         new MonitoringServiceImpl().checkUrl("https://github.com/PeterJames12");
-
     }
 
     /**
@@ -70,14 +68,13 @@ public class MonitoringServiceImpl implements MonitoringService {
             connection.disconnect();
             System.out.println(responseCode);
             System.out.println(monitoringURL.getStatus());
-//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }
     }
 
     private String replacer(int statusCode) {
-
         if (statusCode >= 200 && statusCode < 300) {
             return StatusUrl.OK;
         } else if (statusCode >= 300 && statusCode < 400) {
