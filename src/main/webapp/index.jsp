@@ -27,20 +27,17 @@
         <th><h1>URL</h1></th>
         <th><h1>STATUS</h1></th>
         <th><h1>STATUS CODE</h1></th>
-        <th><h1>EXTRA INFO</h1></th>
+        <th><h1>USE PROXY</h1></th>
     </tr>
     </thead>
 
     <%
-
         final String url = request.getParameter("url");
-
         if (!"".equals(url)) {
             final MonitoringController monitoringController = new MonitoringController();
             monitoringController.saveUrl(url);
         }
     %>
-
 
     <tbody>
 
@@ -64,9 +61,17 @@
 
     <%}%>
 
-    <audio controls>
-        <source src="https://soundcloud.com/search?q=live%20forever" type="audio/mpeg">
+    <% if (true) {%>
+    <audio autoplay>
+        <source src="hello.mp3" type="audio/mpeg" onautocomplete="true">
     </audio>
+    <%}%>
+
+    <% if (false) {%>
+    <audio autoplay>
+        <source src="hello.mp3" type="audio/mpeg" onautocomplete="true">
+    </audio>
+    <%}%>
 
     </tbody>
 </table>
