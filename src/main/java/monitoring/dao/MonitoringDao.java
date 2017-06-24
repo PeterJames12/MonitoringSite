@@ -21,4 +21,11 @@ public interface MonitoringDao {
      * @param url is given entity with set url.
      */
     void saveUrl(Url url);
+
+    /**
+     * Create MonitoringUrl entity.
+     *
+     * @param monitoringURL is given entity.
+     */
+    void saveMonitoringInfo(MonitoringURL monitoringURL);
 }

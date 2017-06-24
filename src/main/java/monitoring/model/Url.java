@@ -14,16 +14,9 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 @AllArgsConstructor
-@org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.DIRTY, dynamicUpdate = true)
-@Table(name = "url")
 public class Url {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
     private Long id;
-    @Column(name = "url", nullable = false)
     private String url;
 }
