@@ -58,13 +58,13 @@
     </tr>
 
     <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>
-    <audio autoplay>
+    <audio controls autoplay>
         <source src="critical.mp3" type="audio/mpeg" onautocomplete="true">
     </audio>
     <%}%>
 
     <% if (StatusUrl.CRITICAL.equals(urlEntity.getStatus())) {%>
-    <audio autoplay>
+    <audio controls autoplay>
         <source src="warning.mp3" type="audio/mpeg" onautocomplete="true">
     </audio>
     <%}%>
