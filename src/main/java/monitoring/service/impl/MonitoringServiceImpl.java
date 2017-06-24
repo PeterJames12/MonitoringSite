@@ -38,7 +38,7 @@ public class MonitoringServiceImpl implements MonitoringService {
     }
 
     public static void main(String[] args) {
-        new MonitoringServiceImpl().checkUrl("https://github.com/PeterJames12");
+        new MonitoringServiceImpl().checkUrl("https://ethereumlottery.net123");
     }
 
     /**
@@ -68,7 +68,7 @@ public class MonitoringServiceImpl implements MonitoringService {
             connection.disconnect();
             System.out.println(responseCode);
             System.out.println(monitoringURL.getStatus());
-            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }

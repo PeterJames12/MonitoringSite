@@ -58,17 +58,14 @@
     </tr>
 
     <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>
-    <audio controls autoplay>
-        <source src="critical.mp3" type="audio/mpeg" onautocomplete="true">
+    <audio autoplay>
+        <source src="warning.mp3" type="audio/mpeg">
+    </audio>
+    <%} else if (StatusUrl.CRITICAL.equals(urlEntity.getStatus())) {%>
+    <audio autoplay>
+        <source src="critical.mp3" type="audio/mpeg">
     </audio>
     <%}%>
-
-    <% if (StatusUrl.CRITICAL.equals(urlEntity.getStatus())) {%>
-    <audio controls autoplay>
-        <source src="warning.mp3" type="audio/mpeg" onautocomplete="true">
-    </audio>
-    <%}%>
-
     <%}%>
 
     </tbody>
