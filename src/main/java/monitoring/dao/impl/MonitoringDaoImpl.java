@@ -9,6 +9,7 @@ import monitoring.model.MonitoringURL;
 import monitoring.model.Url;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -20,7 +21,8 @@ import java.util.List;
 public class MonitoringDaoImpl implements MonitoringDao {
 
     private static final String QUERY_INSERT_URL = "INSERT INTO url (NAME ) VALUES (?)";
-    private static final String QUERY_INSERT_MONITORING_URL = "INSERT INTO monitoring_info (NAME ) VALUES (?)";
+    private static final String QUERY_INSERT_MONITORING_URL = "INSERT INTO monitoring_info (url,status,status_code,extra_info) VALUES (?,?,?,?)";
+
     private static final String QUERY_SELECT = "SELECT * FROM monitoring_info";
 
     /**
@@ -63,6 +65,11 @@ public class MonitoringDaoImpl implements MonitoringDao {
     public void saveMonitoringInfo(MonitoringURL monitoringURL) {
         @Cleanup
         Connection connection = DatabaseConfig.getConnection();
-        Statement statement = connection.prepareStatement(QUERY_INSERT_MONITORING_URL);
+        PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_MONITORING_URL);
+        preparedStatement.setString(1, monitoringURL.getUrl());
+        preparedStatement.setString(2, monitoringURL.getStatus());
+        preparedStatement.setInt(3, monitoringURL.getStatusCode());
+        preparedStatement.setString(4, monitoringURL.getExtraInfo());
+        preparedStatement.execute();
     }
 }

@@ -13,24 +13,6 @@ public class DatabaseConfig {
     private static final String USERNAME = "zqrtvxhfqmdjft";
     private static final String PASS = "5946f5d3a5434dc18a5fd32dc6759c9b62b37cb0e687cb7e1f80b27dbd09c7ba";
 
-    public static void main(String[] args) throws SQLException {
-
-        final Connection connection = getConnection();
-        final Statement statement = connection.createStatement();
-//        statement.execute("CREATE TABLE public.url\n" +
-//                "(\n" +
-//                "    id SERIAL PRIMARY KEY NOT NULL,\n" +
-//                "    name VARCHAR(255)\n" +
-//                ");");
-
-
-        final ResultSet resultSet = statement.executeQuery("select * from url;");
-
-        while (resultSet.next()) {
-            System.out.println(resultSet.getString("name"));
-        }
-    }
-
     @SneakyThrows
     public static Connection getConnection() {
         return DriverManager.getConnection(URL, USERNAME, PASS);
