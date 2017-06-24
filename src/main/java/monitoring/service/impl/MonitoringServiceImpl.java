@@ -42,10 +42,7 @@ public class MonitoringServiceImpl implements MonitoringService {
      */
     @SneakyThrows
     private void checkUrl(String urlName) {
-        final Properties properties = new Properties();
-        final String path = "src/main/java/monitoring/res/url.properties";
-        final FileInputStream file = new FileInputStream(path);
-        properties.load(file);
+        Properties property = getProperty();
         MonitoringURL monitoringURL = new MonitoringURL();
         if (!urlName.startsWith("https://")) {
             urlName = "https://" + urlName;
@@ -53,8 +50,8 @@ public class MonitoringServiceImpl implements MonitoringService {
         URL url = new URL(urlName);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {
-            connection.setRequestMethod(properties.getProperty("request.method"));
-            connection.setConnectTimeout(Integer.parseInt(properties.getProperty("connect.timeout")));
+            connection.setRequestMethod(property.getProperty("request.method"));
+            connection.setConnectTimeout(Integer.parseInt(property.getProperty("connect.timeout")));
             connection.connect();
             int responseCode = connection.getResponseCode();
             monitoringURL.setUrl(url.toString());
@@ -82,5 +79,17 @@ public class MonitoringServiceImpl implements MonitoringService {
             return StatusUrl.CRITICAL;
         }
         return "UNKNOWN";
+    }
+
+    /**
+     * @return url properties.
+     */
+    @SneakyThrows
+    private Properties getProperty() {
+        final Properties properties = new Properties();
+        final String path = "src/main/java/monitoring/res/url.properties";
+        final FileInputStream file = new FileInputStream(path);
+        properties.load(file);
+        return properties;
     }
 }

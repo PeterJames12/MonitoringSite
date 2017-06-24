@@ -8,25 +8,19 @@ import monitoring.dao.MonitoringDao;
 import monitoring.model.MonitoringURL;
 import monitoring.model.Url;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Igor Hnes on 6/24/17.
  */
 public class MonitoringDaoImpl implements MonitoringDao {
-
-    private static final String QUERY_INSERT_URL = "INSERT INTO url (NAME ) VALUES (?)";
-    private static final String QUERY_INSERT_MONITORING_URL = "INSERT INTO monitoring_info (url,status,status_code,extra_info) VALUES (?,?,?,?)";
-    private static final String QUERY_SELECT = "SELECT * FROM monitoring_info";
-    private static final int FIRST = 1;
-    private static final int SECOND = 2;
-    private static final int THIRD = 3;
-    private static final int FOURTH = 4;
 
     /**
      * {@inheritDoc}.
@@ -34,10 +28,11 @@ public class MonitoringDaoImpl implements MonitoringDao {
     @SneakyThrows
     @Override
     public List<MonitoringURL> getUrlInfo() {
+        Properties property = getProperty();
         @Cleanup
         Connection connection = DatabaseConfig.getConnection();
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(QUERY_SELECT);
+        ResultSet resultSet = statement.executeQuery(property.getProperty("select.monitoring.url"));
 
         List<MonitoringURL> monitoringURLList = new LinkedList<>();
 
@@ -49,7 +44,6 @@ public class MonitoringDaoImpl implements MonitoringDao {
             monitoringURL.setExtraInfo(resultSet.getString("extra_info"));
             monitoringURLList.add(monitoringURL);
         }
-
         return monitoringURLList;
     }
 
@@ -59,10 +53,11 @@ public class MonitoringDaoImpl implements MonitoringDao {
     @SneakyThrows
     @Override
     public void saveUrl(Url url) {
+        Properties property = getProperty();
         @Cleanup
         final Connection connection = DatabaseConfig.getConnection();
-        val preparedStatement = connection.prepareStatement(QUERY_INSERT_URL);
-        preparedStatement.setString(FIRST, url.getUrl());
+        val preparedStatement = connection.prepareStatement(property.getProperty("insert.url"));
+        preparedStatement.setString(Integer.parseInt(property.getProperty("first.column")), url.getUrl());
         preparedStatement.execute();
     }
 
@@ -72,13 +67,26 @@ public class MonitoringDaoImpl implements MonitoringDao {
     @SneakyThrows
     @Override
     public void saveMonitoringInfo(MonitoringURL monitoringURL) {
+        Properties property = getProperty();
         @Cleanup
         Connection connection = DatabaseConfig.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_MONITORING_URL);
-        preparedStatement.setString(FIRST, monitoringURL.getUrl());
-        preparedStatement.setString(SECOND, monitoringURL.getStatus());
-        preparedStatement.setInt(THIRD, monitoringURL.getStatusCode());
-        preparedStatement.setString(FOURTH, monitoringURL.getExtraInfo());
+        PreparedStatement preparedStatement = connection.prepareStatement(property.getProperty("insert.monitoring.url"));
+        preparedStatement.setString(Integer.parseInt(property.getProperty("first.column")), monitoringURL.getUrl());
+        preparedStatement.setString(Integer.parseInt(property.getProperty("second.column")), monitoringURL.getStatus());
+        preparedStatement.setInt(Integer.parseInt(property.getProperty("third.column")), monitoringURL.getStatusCode());
+        preparedStatement.setString(Integer.parseInt(property.getProperty("fourth.column")), monitoringURL.getExtraInfo());
         preparedStatement.execute();
+    }
+
+    /**
+     * @return query properties.
+     */
+    @SneakyThrows
+    private Properties getProperty() {
+        final Properties properties = new Properties();
+        final String path = "src/main/java/monitoring/res/query.properties";
+        final FileInputStream file = new FileInputStream(path);
+        properties.load(file);
+        return properties;
     }
 }
