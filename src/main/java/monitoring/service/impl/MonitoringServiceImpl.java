@@ -1,18 +1,16 @@
 package monitoring.service.impl;
 
-import monitoring.dao.MonitoringDao;
+import lombok.SneakyThrows;
 import monitoring.dao.factory.DaoFactory;
 import monitoring.model.MonitoringURL;
 import monitoring.model.Url;
 import monitoring.service.MonitoringService;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.IOException;
+import java.io.FileInputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Igor Hnes on 6/24/17.
@@ -44,44 +42,34 @@ public class MonitoringServiceImpl implements MonitoringService {
 
     }
 
+    /**
+     * Check url and save in database parameters.
+     */
+    @SneakyThrows
     private void checkUrl(String urlName) {
-//        boolean available;
-//        try {
-//            final URLConnection connection = new URL("http://" + url).openConnection();
-//            connection.connect();
-//            System.out.println("monitoring.Service " + url + " available, yeah!");
-//            available = true;
-//        } catch (final MalformedURLException e) {
-//            throw new IllegalStateException("Bad URL: " + url, e);
-//        } catch (final IOException e) {
-//            System.out.println("monitoring.Service " + url + " unavailable, oh no!");
-//            available = false;
-//        }
-//        System.out.println(available);
+        final Properties properties = new Properties();
+        final String path = "src/main/java/monitoring/res/url.properties";
+        final FileInputStream file = new FileInputStream(path);
+        properties.load(file);
 
         MonitoringURL monitoringURL = new MonitoringURL();
-
+        URL url = new URL("https://" + urlName);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {
-            URL url = new URL("https://" + urlName); // create url object for the given string
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("GET");
-            connection.setConnectTimeout(50000); //set the timeout
-            connection.connect(); //connect
-            String responseMessage = connection.getResponseMessage(); //here you get the response message
-            int responseCode = connection.getResponseCode(); //this is http response code
-
-//            System.out.println(url + " is up. Response Code: " + responseMessage);
+            connection.setRequestMethod(properties.getProperty("request.method"));
+            connection.setConnectTimeout(Integer.parseInt(properties.getProperty("connect.timeout")));
+            connection.connect();
+            String responseMessage = connection.getResponseMessage();
+            int responseCode = connection.getResponseCode();
             monitoringURL.setUrl(url.toString());
             monitoringURL.setStatusCode(responseCode);
             monitoringURL.setStatus(responseMessage);
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
-//            System.out.println(responseCode);
             connection.disconnect();
-        }catch(Exception e){
-            e.printStackTrace();
+
+            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+        } catch (Exception e) {
+            connection.disconnect();
         }
-        MonitoringDao monitoringDao = DaoFactory.getMonitoringDao();
-        monitoringDao.saveMonitoringInfo(monitoringURL);
     }
 }
