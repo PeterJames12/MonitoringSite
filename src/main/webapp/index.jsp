@@ -63,6 +63,11 @@
     </tr>
 
     <%}%>
+
+    <audio controls>
+        <source src="https://soundcloud.com/search?q=live%20forever" type="audio/mpeg">
+    </audio>
+
     </tbody>
 </table>
 

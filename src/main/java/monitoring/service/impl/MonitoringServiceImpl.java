@@ -5,6 +5,7 @@ import monitoring.dao.factory.DaoFactory;
 import monitoring.model.MonitoringURL;
 import monitoring.model.Url;
 import monitoring.service.MonitoringService;
+import monitoring.status.StatusUrl;
 
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
@@ -38,7 +39,7 @@ public class MonitoringServiceImpl implements MonitoringService {
 
 
     public static void main(String[] args) {
-        new MonitoringServiceImpl().checkUrl("github.com");
+        new MonitoringServiceImpl().checkUrl("https://github.com/PeterJames12");
 
     }
 
@@ -51,25 +52,39 @@ public class MonitoringServiceImpl implements MonitoringService {
         final String path = "src/main/java/monitoring/res/url.properties";
         final FileInputStream file = new FileInputStream(path);
         properties.load(file);
-
         MonitoringURL monitoringURL = new MonitoringURL();
-        URL url = new URL("https://" + urlName);
+        if (!urlName.startsWith("https://")) {
+            urlName = "https://" + urlName;
+        }
+        URL url = new URL(urlName);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         try {
             connection.setRequestMethod(properties.getProperty("request.method"));
             connection.setConnectTimeout(Integer.parseInt(properties.getProperty("connect.timeout")));
             connection.connect();
-            String responseMessage = connection.getResponseMessage();
             int responseCode = connection.getResponseCode();
             monitoringURL.setUrl(url.toString());
             monitoringURL.setStatusCode(responseCode);
-            monitoringURL.setStatus(responseMessage);
+            monitoringURL.setStatus(replacer(responseCode));
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
             connection.disconnect();
-
-            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+            System.out.println(responseCode);
+            System.out.println(monitoringURL.getStatus());
+//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }
+    }
+
+    private String replacer(int statusCode) {
+
+        if (statusCode >= 200 && statusCode < 300) {
+            return StatusUrl.OK;
+        } else if (statusCode >= 300 && statusCode < 400) {
+            return StatusUrl.WARNING;
+        } else if (statusCode >= 400) {
+            return StatusUrl.CRITICAL;
+        }
+        return "UNKNOWN";
     }
 }
