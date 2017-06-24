@@ -51,15 +51,15 @@
 
     <%
 
-        for (MonitoringURL url : urlList) {
+        for (MonitoringURL urlEntity : urlList) {
 
         %>
 
     <tr>
-        <td><%= url.getUrl()%></td>
-        <td><%= url.getStatus()%></td>
-        <td><%= url.getStatusCode()%></td>
-        <td><%= url.getExtraInfo()%></td>
+        <td><%= urlEntity.getUrl()%></td>
+        <td><%= urlEntity.getStatus()%></td>
+        <td><%= urlEntity.getStatusCode()%></td>
+        <td><%= urlEntity.getExtraInfo()%></td>
     </tr>
 
     <%}%>
