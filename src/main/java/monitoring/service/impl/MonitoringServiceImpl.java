@@ -64,8 +64,6 @@ public class MonitoringServiceImpl implements MonitoringService {
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
             monitoringURL.setLocalDate(LocalDate.now());
             connection.disconnect();
-            System.out.println(responseCode);
-            System.out.println(monitoringURL.getStatus());
             DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();

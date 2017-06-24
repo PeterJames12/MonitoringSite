@@ -52,7 +52,7 @@
         <td><%= urlEntity.getStatus()%></td>
         <td><%= urlEntity.getStatusCode()%></td>
         <td><%= urlEntity.getExtraInfo()%></td>
-        <td><%= urlEntity.getLocalDate()%></td>
+        <td><%= urlEntity.getLocalDate().toString()%></td>
     </tr>
 
     <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>

@@ -75,6 +75,7 @@ public class MonitoringDaoImpl implements MonitoringDao {
         preparedStatement.setString(Integer.parseInt(property.getProperty("second.column")), monitoringURL.getStatus());
         preparedStatement.setInt(Integer.parseInt(property.getProperty("third.column")), monitoringURL.getStatusCode());
         preparedStatement.setString(Integer.parseInt(property.getProperty("fourth.column")), monitoringURL.getExtraInfo());
+        preparedStatement.setString(Integer.parseInt(property.getProperty("fifth.column")), monitoringURL.getLocalDate().toString());
         preparedStatement.execute();
     }
 
