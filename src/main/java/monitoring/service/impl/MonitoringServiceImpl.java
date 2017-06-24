@@ -38,14 +38,14 @@ public class MonitoringServiceImpl implements MonitoringService {
         final Url urlEntity = new Url();
         urlEntity.setUrl(url);
         DaoFactory.getMonitoringDao().saveUrl(urlEntity);
-        checkUrl(url);
+        saveCheckUrl(url);
     }
 
     /**
      * Check url and save in database parameters.
      */
     @SneakyThrows
-    private void checkUrl(String urlName) {
+    private void saveCheckUrl(String urlName) {
         Properties property = getProperty();
         MonitoringURL monitoringURL = new MonitoringURL();
         if (!urlName.startsWith("https://")) {
