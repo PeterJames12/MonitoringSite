@@ -11,7 +11,7 @@ import java.util.List;
 public interface MonitoringDao {
 
     /**
-     * @return list of {@link MonitoringURL}
+     * @return list of {@link MonitoringURL}.
      */
     List<MonitoringURL> getUrlInfo();
 

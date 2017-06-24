@@ -37,10 +37,6 @@ public class MonitoringServiceImpl implements MonitoringService {
         checkUrl(url);
     }
 
-    public static void main(String[] args) {
-        new MonitoringServiceImpl().checkUrl("https://ethereumlottery.net123");
-    }
-
     /**
      * Check url and save in database parameters.
      */
@@ -68,7 +64,7 @@ public class MonitoringServiceImpl implements MonitoringService {
             connection.disconnect();
             System.out.println(responseCode);
             System.out.println(monitoringURL.getStatus());
-//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }
