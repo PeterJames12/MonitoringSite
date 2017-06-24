@@ -1,7 +1,4 @@
-<%@ page import="monitoring.model.MonitoringURL" %>
-<%@ page import="java.util.List" %>
 <%@ page import="monitoring.controller.MonitoringController" %>
-<%@ page import="monitoring.util.HibernateUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
