@@ -2,6 +2,8 @@
 <%@ page import="monitoring.model.MonitoringURL" %>
 <%@ page import="java.util.List" %>
 <%@ page import="monitoring.status.StatusUrl" %>
+<%@ page import="java.util.stream.Collector" %>
+<%@ page import="java.util.stream.Collectors" %>
 <%@ page contentType="text/html;charset=UTF-8" errorPage="errorPage.jsp" language="java" %>
 <html>
 <head>

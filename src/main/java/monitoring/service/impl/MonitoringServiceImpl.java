@@ -10,6 +10,7 @@ import monitoring.status.StatusUrl;
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
@@ -23,7 +24,9 @@ public class MonitoringServiceImpl implements MonitoringService {
      */
     @Override
     public List<MonitoringURL> getUrlInfo() {
-        return DaoFactory.getMonitoringDao().getUrlInfo();
+        List<MonitoringURL> urlInfo = DaoFactory.getMonitoringDao().getUrlInfo();
+        Collections.reverse(urlInfo);
+        return urlInfo;
     }
 
     /**
