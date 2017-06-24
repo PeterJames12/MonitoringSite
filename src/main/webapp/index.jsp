@@ -1,6 +1,7 @@
 <%@ page import="monitoring.controller.MonitoringController" %>
 <%@ page import="monitoring.model.MonitoringURL" %>
 <%@ page import="java.util.List" %>
+<%@ page import="monitoring.status.StatusUrl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -56,17 +57,15 @@
         <td><%= urlEntity.getExtraInfo()%></td>
     </tr>
 
-    <%}%>
-
-    <% if (true) {%>
+    <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>
     <audio autoplay>
-        <source src="hello.mp3" type="audio/mpeg" onautocomplete="true">
+        <source src="critical.mp3" type="audio/mpeg" onautocomplete="true">
     </audio>
     <%}%>
 
-    <% if (false) {%>
+    <% if (StatusUrl.CRITICAL.equals(urlEntity.getStatus())) {%>
     <audio autoplay>
-        <source src="hello.mp3" type="audio/mpeg" onautocomplete="true">
+        <source src="warning.mp3" type="audio/mpeg" onautocomplete="true">
     </audio>
     <%}%>
 
