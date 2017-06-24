@@ -39,7 +39,7 @@ public class MonitoringServiceImpl implements MonitoringService {
 
 
     public static void main(String[] args) {
-        new MonitoringServiceImpl().checkUrl("github.com");
+        new MonitoringServiceImpl().checkUrl("https://github.com/PeterJames12");
 
     }
 
@@ -69,7 +69,8 @@ public class MonitoringServiceImpl implements MonitoringService {
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
             connection.disconnect();
             System.out.println(responseCode);
-            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+            System.out.println(monitoringURL.getStatus());
+//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }
