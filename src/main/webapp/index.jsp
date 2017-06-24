@@ -35,8 +35,11 @@
     <%
 
         final String url = request.getParameter("url");
-        final MonitoringController monitoringController = new MonitoringController();
-        monitoringController.saveUrl(url);
+
+        if (!"".equals(url)) {
+            final MonitoringController monitoringController = new MonitoringController();
+            monitoringController.saveUrl(url);
+        }
     %>
 
 
