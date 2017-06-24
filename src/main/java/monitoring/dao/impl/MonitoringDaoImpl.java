@@ -22,8 +22,11 @@ public class MonitoringDaoImpl implements MonitoringDao {
 
     private static final String QUERY_INSERT_URL = "INSERT INTO url (NAME ) VALUES (?)";
     private static final String QUERY_INSERT_MONITORING_URL = "INSERT INTO monitoring_info (url,status,status_code,extra_info) VALUES (?,?,?,?)";
-
     private static final String QUERY_SELECT = "SELECT * FROM monitoring_info";
+    private static final int FIRST = 1;
+    private static final int SECOND = 2;
+    private static final int THIRD = 3;
+    private static final int FOURTH = 4;
 
     /**
      * {@inheritDoc}.
@@ -50,26 +53,32 @@ public class MonitoringDaoImpl implements MonitoringDao {
         return monitoringURLList;
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @SneakyThrows
     @Override
     public void saveUrl(Url url) {
         @Cleanup
         final Connection connection = DatabaseConfig.getConnection();
         val preparedStatement = connection.prepareStatement(QUERY_INSERT_URL);
-        preparedStatement.setString(1, url.getUrl());
+        preparedStatement.setString(FIRST, url.getUrl());
         preparedStatement.execute();
     }
 
+    /**
+     * {@inheritDoc}.
+     */
     @SneakyThrows
     @Override
     public void saveMonitoringInfo(MonitoringURL monitoringURL) {
         @Cleanup
         Connection connection = DatabaseConfig.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT_MONITORING_URL);
-        preparedStatement.setString(1, monitoringURL.getUrl());
-        preparedStatement.setString(2, monitoringURL.getStatus());
-        preparedStatement.setInt(3, monitoringURL.getStatusCode());
-        preparedStatement.setString(4, monitoringURL.getExtraInfo());
+        preparedStatement.setString(FIRST, monitoringURL.getUrl());
+        preparedStatement.setString(SECOND, monitoringURL.getStatus());
+        preparedStatement.setInt(THIRD, monitoringURL.getStatusCode());
+        preparedStatement.setString(FOURTH, monitoringURL.getExtraInfo());
         preparedStatement.execute();
     }
 }

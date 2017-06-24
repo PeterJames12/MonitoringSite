@@ -59,7 +59,7 @@ public class MonitoringServiceImpl implements MonitoringService {
             int responseCode = connection.getResponseCode();
             monitoringURL.setUrl(url.toString());
             monitoringURL.setStatusCode(responseCode);
-            monitoringURL.setStatus(replacer(responseCode));
+            monitoringURL.setStatus(setStatus(responseCode));
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
             connection.disconnect();
             System.out.println(responseCode);
@@ -70,12 +70,15 @@ public class MonitoringServiceImpl implements MonitoringService {
         }
     }
 
-    private String replacer(int statusCode) {
-        if (statusCode >= 200 && statusCode < 300) {
+    /**
+     * Sent status by given status code.
+     */
+    private String setStatus(int statusCode) {
+        if (statusCode >= StatusUrl.CODE_OK && statusCode < StatusUrl.CODE_WARNING) {
             return StatusUrl.OK;
-        } else if (statusCode >= 300 && statusCode < 400) {
+        } else if (statusCode >= StatusUrl.CODE_WARNING && statusCode < StatusUrl.CODE_CRITICAL) {
             return StatusUrl.WARNING;
-        } else if (statusCode >= 400) {
+        } else if (statusCode >= StatusUrl.CODE_CRITICAL) {
             return StatusUrl.CRITICAL;
         }
         return "UNKNOWN";

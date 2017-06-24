@@ -13,6 +13,9 @@ public class DatabaseConfig {
     private static final String USERNAME = "zqrtvxhfqmdjft";
     private static final String PASS = "5946f5d3a5434dc18a5fd32dc6759c9b62b37cb0e687cb7e1f80b27dbd09c7ba";
 
+    /**
+     * @return connection to datebase.
+     */
     @SneakyThrows
     public static Connection getConnection() {
         return DriverManager.getConnection(URL, USERNAME, PASS);
