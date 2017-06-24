@@ -2,7 +2,7 @@
 <%@ page import="monitoring.model.MonitoringURL" %>
 <%@ page import="java.util.List" %>
 <%@ page import="monitoring.status.StatusUrl" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" errorPage="errorPage.jsp" language="java" %>
 <html>
 <head>
     <title>Monitoring Site</title>
@@ -31,7 +31,7 @@
         <th><h1>USE PROXY</h1></th>
     </tr>
     </thead>
-
+    <tbody>
     <%
         final String url = request.getParameter("url");
         if (!"".equals(url)) {
@@ -39,14 +39,10 @@
             monitoringController.saveUrl(url);
         }
     %>
-
-    <tbody>
-
     <%
         final MonitoringController monitoringController = new MonitoringController();
         final List<MonitoringURL> urlList = monitoringController.getUrlInfo();
     %>
-
     <%
         for (MonitoringURL urlEntity : urlList) {
         %>
@@ -71,4 +67,11 @@
 </table>
 
 </body>
+
+<footer>
+    <div align="center">
+        <p>Github<a href="https://github.com/PeterJames12/MonitoringSite"> Link </a> 2017</p>
+    </div>
+</footer>
+
 </html>
