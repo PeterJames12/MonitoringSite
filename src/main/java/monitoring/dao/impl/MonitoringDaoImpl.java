@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MonitoringDaoImpl implements MonitoringDao {
 
-    private static final String QUERY = "INSERT INTO url (url) VALUES (?)";
+    private static final String QUERY = "INSERT INTO url (NAME ) VALUES (?)";
 
     /**
      * {@inheritDoc}.
