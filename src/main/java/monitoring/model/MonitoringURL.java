@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 /**
  * @author Igor Hnes on 6/21/17.
  */
@@ -21,5 +19,5 @@ public class MonitoringURL {
     private String status;
     private int statusCode;
     private String extraInfo;
-    private LocalDate localDate;
+    private String localDate;
 }

@@ -42,6 +42,7 @@ public class MonitoringDaoImpl implements MonitoringDao {
             monitoringURL.setStatus(resultSet.getString("status"));
             monitoringURL.setStatusCode(resultSet.getInt("status_code"));
             monitoringURL.setExtraInfo(resultSet.getString("extra_info"));
+            monitoringURL.setLocalDate(resultSet.getString("date"));
             monitoringURLList.add(monitoringURL);
         }
         return monitoringURLList;
