@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">
+            <![CDATA[jdbc:postgresql://ec2-54-75-229-201.eu-west-1.compute.amazonaws.com:5432/d8h0drjb9eoidt?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory&]]></property>
+        <property name="hibernate.connection.username">cmienhftbssytm</property>
+        <property name="hibernate.connection.password">3d33063c06d2d1a20bec8b1c099836b8245bbbdb9f9e2587cacb3802e699046e</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="show_sql">true</property>
+
+        <mapping class="monitoring.model.MonitoringURL"/>
+        <mapping class="monitoring.model.Url"/>
+
+         <!--DB schema will be updated if needed -->
+         <!--<property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>
+
+<!--
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="connection.url">
+            <![CDATA[jdbc:mysql://localhost:3306/Kontact?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC]]></property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">toor</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect"> org.hibernate.dialect.MySQLDialect</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="show_sql">true</property>
+
+
+        <mapping class="defenmonitoring.modelodel.Instructor"/>
+        <mapping class="defenmonitoring.modelodel.Project"/>
+        <mapping class="defenmonitoring.modelodel.Apprentice"/>
+        <mapping class="defenmonitoring.modelodel.AvailableProject"/>
+        <mapping class="defenmonitoring.modelodel.Car"/>
+        <mapping class="defenmonitoring.modelodel.WorkDay"/>
+        <mapping class="defenmonitoring.modelodel.ProjectTimes"/>
+
+        <mapping class="defenmonitoring.modelodel.User"/>
+&lt;!&ndash;&ndash;&gt;
+         &lt;!&ndash;DB schema will be updated if needed&ndash;&gt;
+         &lt;!&ndash;<property name="hbm2ddl.auto">update</property>&ndash;&gt;
+        </session-factory>
+</hibernate-configuration>
+-->

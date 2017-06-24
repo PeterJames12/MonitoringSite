@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Context>
+    <Resource name="jdbc/postgres"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://ec2-54-75-229-201.eu-west-1.compute.amazonaws.com:5432/d8h0drjb9eoidt"
+              username="cmienhftbssytm"
+              password="3d33063c06d2d1a20bec8b1c099836b8245bbbdb9f9e2587cacb3802e699046e"
+              maxTotal="20"
+              maxIdle="10"
+              maxWaitMillis="-1"/>
+</Context>
