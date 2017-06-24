@@ -2,8 +2,6 @@
 <%@ page import="monitoring.model.MonitoringURL" %>
 <%@ page import="java.util.List" %>
 <%@ page import="monitoring.status.StatusUrl" %>
-<%@ page import="java.util.stream.Collector" %>
-<%@ page import="java.util.stream.Collectors" %>
 <%@ page contentType="text/html;charset=UTF-8" errorPage="errorPage.jsp" language="java" %>
 <html>
 <head>
@@ -31,6 +29,7 @@
         <th><h1>STATUS</h1></th>
         <th><h1>STATUS CODE</h1></th>
         <th><h1>USE PROXY</h1></th>
+        <th><h1>DATE</h1></th>
     </tr>
     </thead>
     <tbody>
@@ -53,6 +52,7 @@
         <td><%= urlEntity.getStatus()%></td>
         <td><%= urlEntity.getStatusCode()%></td>
         <td><%= urlEntity.getExtraInfo()%></td>
+        <td><%= urlEntity.getLocalDate()%></td>
     </tr>
 
     <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>

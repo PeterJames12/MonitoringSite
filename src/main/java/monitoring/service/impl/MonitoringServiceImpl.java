@@ -10,6 +10,7 @@ import monitoring.status.StatusUrl;
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
@@ -61,6 +62,7 @@ public class MonitoringServiceImpl implements MonitoringService {
             monitoringURL.setStatusCode(responseCode);
             monitoringURL.setStatus(setStatus(responseCode));
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
+            monitoringURL.setLocalDate(LocalDate.now());
             connection.disconnect();
             System.out.println(responseCode);
             System.out.println(monitoringURL.getStatus());
