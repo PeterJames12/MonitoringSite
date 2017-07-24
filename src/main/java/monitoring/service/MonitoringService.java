@@ -20,4 +20,9 @@ public interface MonitoringService {
      * @param url is given url.
      */
     void saveUrl(String url);
+
+    /**
+     * Delete urk with given id.
+     */
+    void deleteUrl(int id);
 }

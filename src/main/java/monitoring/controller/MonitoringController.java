@@ -28,4 +28,11 @@ public class MonitoringController {
     public List<MonitoringURL> getUrlInfo() {
         return ServiceFactory.getMonitoringService().getUrlInfo();
     }
+
+    /**
+     * Delete url with given user id.
+     */
+    public void deleteUrl(int urlId) {
+        ServiceFactory.getMonitoringService().deleteUrl(urlId);
+    }
 }

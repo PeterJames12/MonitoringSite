@@ -1,3 +1,4 @@
+<%@ taglib prefix="sslext" uri="http://sslext.sourceforge.net/sslext" %>
 <%@ page import="monitoring.controller.MonitoringController" %>
 <%@ page import="monitoring.model.MonitoringURL" %>
 <%@ page import="java.util.List" %>
@@ -52,7 +53,7 @@
         <td><%= urlEntity.getStatus()%></td>
         <td><%= urlEntity.getStatusCode()%></td>
         <td><%= urlEntity.getExtraInfo()%></td>
-        <td><%= urlEntity.getLocalDate().toString()%></td>
+        <td><%= urlEntity.getLocalDate()%></td>
     </tr>
 
     <% if (StatusUrl.WARNING.equals(urlEntity.getStatus())) {%>

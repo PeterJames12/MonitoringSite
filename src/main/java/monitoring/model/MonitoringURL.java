@@ -1,9 +1,6 @@
 package monitoring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author Igor Hnes on 6/21/17.
@@ -20,4 +17,5 @@ public class MonitoringURL {
     private int statusCode;
     private String extraInfo;
     private String localDate;
+
 }

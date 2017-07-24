@@ -81,6 +81,21 @@ public class MonitoringDaoImpl implements MonitoringDao {
     }
 
     /**
+     * {@inheritDoc}.
+     */
+    @SneakyThrows
+    @Override
+    public void deleteUrl(int id) {
+        Properties property = getProperty();
+        @Cleanup
+        Connection connection = DatabaseConfig.getConnection();
+
+        val preparedStatement = connection.prepareStatement(property.getProperty("delete.monitoring.url"));
+        preparedStatement.setInt(1, id);
+        preparedStatement.execute();
+    }
+
+    /**
      * @return query properties.
      */
     @SneakyThrows

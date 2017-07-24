@@ -28,4 +28,9 @@ public interface MonitoringDao {
      * @param monitoringURL is given entity.
      */
     void saveMonitoringInfo(MonitoringURL monitoringURL);
+
+    /**
+     * Delete urk with given id.
+     */
+    void deleteUrl(int id);
 }

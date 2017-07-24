@@ -42,6 +42,14 @@ public class MonitoringServiceImpl implements MonitoringService {
     }
 
     /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public void deleteUrl(int id) {
+        DaoFactory.getMonitoringDao().deleteUrl(id);
+    }
+
+    /**
      * Check url and save in database parameters.
      */
     @SneakyThrows
@@ -56,6 +64,7 @@ public class MonitoringServiceImpl implements MonitoringService {
         try {
             connection.setRequestMethod(property.getProperty("request.method"));
             connection.setConnectTimeout(Integer.parseInt(property.getProperty("connect.timeout")));
+            System.out.println(connection.getReadTimeout());
             connection.connect();
             int responseCode = connection.getResponseCode();
             monitoringURL.setUrl(url.toString());
@@ -64,7 +73,7 @@ public class MonitoringServiceImpl implements MonitoringService {
             monitoringURL.setExtraInfo(String.valueOf(connection.usingProxy()));
             monitoringURL.setLocalDate(LocalDate.now().toString());
             connection.disconnect();
-            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
+//            DaoFactory.getMonitoringDao().saveMonitoringInfo(monitoringURL);
         } catch (Exception e) {
             connection.disconnect();
         }
